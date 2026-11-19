@@ -102,6 +102,10 @@
       <p>In Safari, Save and Activate saved a snippet without activating it, because the editor read the pressed button from keyboard focus. I switched it to the submit event's button and kept Enter in the title field as a plain save, so it cannot deactivate a snippet by accident. Covered by end-to-end tests that fail before the fix.</p>
     </li>
     <li>
+      <div class="head"><span class="proj">Otter Blocks (Themeisle)</span><span class="tag wait">in review</span><a href="https://github.com/Codeinwp/otter-blocks/pull/3187">#3187</a></div>
+      <p>Centered text with the typing animation jumped sideways when the animation ended. I measured the text position in a running site, found two causes (the caret took up width, and a hidden copy of the last character was never cleared), and fixed both with unit tests that fail before the change.</p>
+    </li>
+    <li>
       <div class="head"><span class="proj">Ghost</span><span class="tag wait">in review</span><a href="https://github.com/TryGhost/Ghost/pull/32937">#32937</a></div>
       <p>Comment counts did not render when the class option contained spaces.</p>
     </li>
