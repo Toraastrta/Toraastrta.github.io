@@ -114,6 +114,10 @@
       <p>Post search results, such as the certificate template search, showed titles with raw HTML entities (<code>&amp;#8211;</code> instead of a dash). An open bug since 2022. I decoded the titles the same way the rest of the package does and added a unit test that fails before the change.</p>
     </li>
     <li>
+      <div class="head"><span class="proj">Orca</span><span class="tag wait">in review</span><a href="https://github.com/stablyai/orca/pull/44941">#44941</a></div>
+      <p>On iOS 16.0 to 16.3, a single regex lookbehind anywhere in the bundle stops the mobile web app from loading. A recent change had added one back to the browser URL helper two days after the last ones were removed. I rewrote it as an equivalent pattern without lookbehind, so the next release loads on those iPhones again.</p>
+    </li>
+    <li>
       <div class="head"><span class="proj">Meta Box</span><span class="tag wait">in review</span><a href="https://github.com/wpmetabox/meta-box/pull/1746">#1746</a></div>
       <p>A user reported on the WordPress.org forum that a select field showed <code>[object Object]</code> instead of the chosen item. I reproduced it on WooCommerce screens, where selectWoo replaces select2, traced it to the icon field missing a check that other fields already had, and fixed it.</p>
     </li>
