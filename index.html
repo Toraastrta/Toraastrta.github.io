@@ -72,6 +72,10 @@
       <p>The Mini-Cart footer computed the cart subtotal on every render and wrote it to an Interactivity API store that nothing read. I removed the dead state and kept the now-unused protected method as deprecated, so extensions that subclass the block keep working.</p>
     </li>
     <li>
+      <div class="head"><span class="proj">React Router</span><span class="tag ok">merged</span><a href="https://github.com/remix-run/react-router/pull/15776">#15776</a> · <a href="https://github.com/remix-run/react-router/pull/15779">#15779</a></div>
+      <p>Two fixes in one of the most used React libraries. Form <code>encType</code> and <code>formEncType</code> were compared case-sensitively, so <code>encType="Multipart/Form-Data"</code> fell back to URL encoding and file inputs were sent as just their file names. Memory history <code>go()</code> reported the requested delta even after clamping it at the start or end of the stack, so undoing a blocked navigation left the history on a different entry from the UI. Both were approved and merged by a maintainer.</p>
+    </li>
+    <li>
       <div class="head"><span class="proj">PostHog (posthog-python)</span><span class="tag ok">merged</span><a href="https://github.com/PostHog/posthog-python/pull/1265">#1265</a></div>
       <p>Exception autocapture sent <code>null</code> instead of the truncated source line for any line longer than 1024 bytes. I traced it to a wrapper object that was never unwrapped, fixed it, and added a test that fails on the old code.</p>
     </li>
@@ -112,10 +116,6 @@
     <li>
       <div class="head"><span class="proj">Ghost</span><span class="tag wait">in review</span><a href="https://github.com/TryGhost/Ghost/pull/32937">#32937</a></div>
       <p>Comment counts did not render when the class option contained spaces.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">React Router</span><span class="tag wait">in review</span><a href="https://github.com/remix-run/react-router/pull/15776">#15776</a> · <a href="https://github.com/remix-run/react-router/pull/15779">#15779</a></div>
-      <p>Form <code>encType</code> was compared case-sensitively, and memory history <code>go()</code> reported a delta that could not happen after clamping.</p>
     </li>
     <li>
       <div class="head"><span class="proj">flyctl</span><span class="tag wait">in review</span><a href="https://github.com/superfly/flyctl/pull/5479">#5479</a></div>
