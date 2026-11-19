@@ -106,6 +106,10 @@
       <p>Centered text with the typing animation jumped sideways when the animation ended. I measured the text position in a running site, found two causes (the caret took up width, and a hidden copy of the last character was never cleared), and fixed both with unit tests that fail before the change.</p>
     </li>
     <li>
+      <div class="head"><span class="proj">LifterLMS</span><span class="tag wait">in review</span><a href="https://github.com/gocodebox/lifterlms/pull/3510">#3510</a></div>
+      <p>Post search results, such as the certificate template search, showed titles with raw HTML entities (<code>&amp;#8211;</code> instead of a dash). An open bug since 2022. I decoded the titles the same way the rest of the package does and added a unit test that fails before the change.</p>
+    </li>
+    <li>
       <div class="head"><span class="proj">Ghost</span><span class="tag wait">in review</span><a href="https://github.com/TryGhost/Ghost/pull/32937">#32937</a></div>
       <p>Comment counts did not render when the class option contained spaces.</p>
     </li>
