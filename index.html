@@ -122,6 +122,10 @@
       <p>Project statistics counted strings from components shared into the project, but the search behind those counts left them out, so a link such as "Read-only strings: 75" opened "No strings found!". I made the project and project language searches cover the same components as the statistics, with a test that fails before the change.</p>
     </li>
     <li>
+      <div class="head"><span class="proj">Ultimate Member</span><span class="tag wait">in review</span><a href="https://github.com/ultimatemember/ultimatemember/pull/1945">#1945</a></div>
+      <p>When an SEO plugin built its <code>/llms.txt</code> by rendering page content, the profile shortcode redirected logged-out visitors to the home page and replaced the whole response. I reproduced the redirect and limited it to requests that are actually viewing a page, so the profile page still redirects as before.</p>
+    </li>
+    <li>
       <div class="head"><span class="proj">Meta Box</span><span class="tag wait">in review</span><a href="https://github.com/wpmetabox/meta-box/pull/1746">#1746</a></div>
       <p>A user reported on the WordPress.org forum that a select field showed <code>[object Object]</code> instead of the chosen item. I reproduced it on WooCommerce screens, where selectWoo replaces select2, traced it to the icon field missing a check that other fields already had, and fixed it.</p>
     </li>
