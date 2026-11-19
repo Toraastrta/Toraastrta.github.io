@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tora Tanigaki — bug fixing and maintenance</title>
+<meta name="description" content="I find and fix bugs in production software: reproduce, find the root cause, fix it with a test. Merged fixes in WooCommerce, PostHog, Zed and more.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1d1d1f;
+    --muted: #5f6368;
+    --line: #e3e3e6;
+    --card: #f7f7f8;
+    --accent: #2457d6;
+    --ok: #1a7f37;
+    --wait: #9a6700;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111214;
+      --text: #ececee;
+      --muted: #a0a3a8;
+      --line: #2a2c30;
+      --card: #191b1e;
+      --accent: #7ea2ff;
+      --ok: #4ac26b;
+      --wait: #d4a72c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 12px; }
+  h2 { font-size: 1.15rem; margin: 48px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  p { margin: 0 0 12px; }
+  a { color: var(--accent); }
+  .lead { color: var(--muted); font-size: 1.05rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-top: 16px; }
+  ul.items { list-style: none; padding: 0; margin: 0; }
+  ul.items li { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+  .head { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; margin-bottom: 4px; }
+  .proj { font-weight: 600; }
+  .tag { font-size: 0.78rem; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; }
+  .tag.ok { color: var(--ok); }
+  .tag.wait { color: var(--wait); }
+  .small { color: var(--muted); font-size: 0.92rem; margin: 0; }
+  ol.steps { padding-left: 1.2em; margin: 0; }
+  ol.steps li { margin-bottom: 6px; }
+  footer { margin-top: 48px; color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>I find and fix bugs in production software.</h1>
+  <p class="lead">I reproduce the problem, find the root cause, fix it with a test that fails before the change, and verify the result in a running app. Mostly PHP (WordPress and WooCommerce), TypeScript and Python.</p>
+  <p class="meta">Toranosuke (Tora) Tanigaki · Remote, async, in English · <a href="https://github.com/Toraastrta">GitHub</a></p>
+</header>
+
+<section>
+  <h2>Merged fixes</h2>
+  <ul class="items">
+    <li>
+      <div class="head"><span class="proj">WooCommerce</span><span class="tag ok">merged</span><a href="https://github.com/woocommerce/woocommerce/pull/70900">#70900</a></div>
+      <p>The Mini-Cart footer computed the cart subtotal on every render and wrote it to an Interactivity API store that nothing read. I removed the dead state and kept the now-unused protected method as deprecated, so extensions that subclass the block keep working.</p>
+    </li>
+    <li>
+      <div class="head"><span class="proj">PostHog (posthog-python)</span><span class="tag ok">merged</span><a href="https://github.com/PostHog/posthog-python/pull/1265">#1265</a></div>
+      <p>Exception autocapture sent <code>null</code> instead of the truncated source line for any line longer than 1024 bytes. I traced it to a wrapper object that was never unwrapped, fixed it, and added a test that fails on the old code.</p>
+    </li>
+    <li>
+      <div class="head"><span class="proj">e2e</span><span class="tag ok">merged</span><a href="https://github.com/e2e-inc/e2e/pull/1837">#1837</a> · <a href="https://github.com/e2e-inc/e2e/pull/1917">#1917</a></div>
+      <p>The replay cache treated growing Japanese, Chinese and Korean tallies (<code>42件</code>, <code>42건이 검색되었습니다</code>) as fixed page anchors, so recorded replays went stale. I extended the count pattern and checked the tests by deleting each part of the regex to confirm a test fails.</p>
+    </li>
+    <li>
+      <div class="head"><span class="proj">Zed</span><span class="tag ok">merged</span><a href="https://github.com/zed-industries/zed/pull/66974">#66974</a></div>
+      <p>Eleven settings documented a different default value from the one Zed actually uses. I corrected them against the real defaults. Approved and merged within about an hour.</p>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>In review</h2>
+  <ul class="items">
+    <li>
+      <div class="head"><span class="proj">Supabase Storage</span><span class="tag wait">in review</span><a href="https://github.com/supabase/storage/pull/1722">#1722</a></div>
+      <p>S3 requests for operations Storage does not implement, such as PutObjectTagging and DeleteObjectTagging, were routed to upload and delete. They overwrote or deleted objects and buckets while returning success. Reproduced with the AWS SDK against a real database; they now get 501.</p>
+    </li>
+    <li>
+      <div class="head"><span class="proj">WooCommerce</span><span class="tag wait">in review</span><a href="https://github.com/woocommerce/woocommerce/pull/71118">#71118</a></div>
+      <p>The Variation Selector rendered a list with no list items, so screen readers announced an empty list (a critical axe-core error). I traced it to the change that introduced it and restored the missing role, with a unit test.</p>
+    </li>
+    <li>
+      <div class="head"><span class="proj">Ghost</span><span class="tag wait">in review</span><a href="https://github.com/TryGhost/Ghost/pull/32937">#32937</a></div>
+      <p>Comment counts did not render when the class option contained spaces.</p>
+    </li>
+    <li>
+      <div class="head"><span class="proj">React Router</span><span class="tag wait">in review</span><a href="https://github.com/remix-run/react-router/pull/15776">#15776</a> · <a href="https://github.com/remix-run/react-router/pull/15779">#15779</a></div>
+      <p>Form <code>encType</code> was compared case-sensitively, and memory history <code>go()</code> reported a delta that could not happen after clamping.</p>
+    </li>
+    <li>
+      <div class="head"><span class="proj">flyctl</span><span class="tag wait">in review</span><a href="https://github.com/superfly/flyctl/pull/5479">#5479</a></div>
+      <p><code>fly secrets import</code> cut quoted values at a <code>#</code> character.</p>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>How I work</h2>
+  <ol class="steps">
+    <li>Reproduce the bug locally, in a test or a running app, before touching the code.</li>
+    <li>Find the root cause, including the change that introduced it when there is one.</li>
+    <li>Fix it in the smallest change that solves it, without breaking code that depends on the old behavior.</li>
+    <li>Prove it: a test that fails before the fix and passes after, and a check in the running app.</li>
+  </ol>
+  <p class="small" style="margin-top:12px">I use AI tools (Claude Code) to move faster and say so in every pull request. I review every change and run the tests and checks myself.</p>
+</section>
+
+<section>
+  <h2>What I can do for your team</h2>
+  <p>Bug fixing and ongoing maintenance as a contractor, hourly or monthly: working through an issue backlog, fixing regressions after a release, keeping a WordPress or WooCommerce plugin compatible with new WordPress, WooCommerce and PHP versions, or the same for a TypeScript or Python codebase.</p>
+  <p>To get in touch, contact me through <a href="https://github.com/Toraastrta">GitHub</a>.</p>
+</section>
+
+<footer>
+  <p>I also build and ship my own developer tools. See <a href="https://github.com/Toraastrta">my GitHub profile</a>.</p>
+</footer>
+
+</main>
+</body>
+</html>
