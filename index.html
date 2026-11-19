@@ -98,6 +98,10 @@
       <p>The Variation Selector rendered a list with no list items, so screen readers announced an empty list (a critical axe-core error). I traced it to the change that introduced it and restored the missing role, with a unit test.</p>
     </li>
     <li>
+      <div class="head"><span class="proj">Code Snippets</span><span class="tag wait">in review</span><a href="https://github.com/codesnippetspro/code-snippets/pull/633">#633</a></div>
+      <p>In Safari, Save and Activate saved a snippet without activating it, because the editor read the pressed button from keyboard focus. I switched it to the submit event's button and kept Enter in the title field as a plain save, so it cannot deactivate a snippet by accident. Covered by end-to-end tests that fail before the fix.</p>
+    </li>
+    <li>
       <div class="head"><span class="proj">Ghost</span><span class="tag wait">in review</span><a href="https://github.com/TryGhost/Ghost/pull/32937">#32937</a></div>
       <p>Comment counts did not render when the class option contained spaces.</p>
     </li>
