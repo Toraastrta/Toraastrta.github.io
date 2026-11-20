@@ -19,6 +19,8 @@
     --heading: #8a909c;
     --underline: #7fd3c9;
     --ok: #2f7a45;
+    --merged: #8250df;
+    --pr: #2563eb;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -31,6 +33,8 @@
       --heading: #7d8491;
       --underline: #1f7a70;
       --ok: #6fbf86;
+      --merged: #a371f7;
+      --pr: #60a5fa;
     }
   }
   * { box-sizing: border-box; }
@@ -66,7 +70,8 @@
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
   .card h3 { font-size: 1.02rem; margin: 0 0 8px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
   .card h3 .links { font-weight: 500; font-size: .85rem; }
-  .tag { font-size: .7rem; font-weight: 500; padding: 0 7px; border-radius: 999px; border: 1px solid currentColor; color: var(--ok); opacity: .85; }
+  .tag { font-size: .7rem; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--merged); color: #fff; }
+  a[href*="/pull/"] { color: var(--pr); text-decoration-color: currentColor; text-decoration-thickness: 1px; font-weight: 600; }
   .card ul { margin: 0; padding-left: 1.1em; }
   .card li { margin-bottom: 6px; }
   .label { font-weight: 600; }
