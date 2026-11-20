@@ -15,9 +15,9 @@
     --muted: #5b6475;
     --line: #e3e6ec;
     --card: #f7f8fa;
-    --accent: #1a1f2b;
+    --accent: #0f766e;
     --heading: #8a909c;
-    --underline: #c4c8d0;
+    --underline: #99d1ca;
     --ok: #2f7a45;
   }
   @media (prefers-color-scheme: dark) {
@@ -27,9 +27,9 @@
       --muted: #a2a9b6;
       --line: #2a2e35;
       --card: #191c20;
-      --accent: #eceef2;
+      --accent: #5eead4;
       --heading: #7d8491;
-      --underline: #4a505b;
+      --underline: #2b6f66;
       --ok: #6fbf86;
     }
   }
@@ -44,7 +44,14 @@
   h1 { font-size: 2.1rem; line-height: 1.2; margin: 0 0 6px; letter-spacing: -.01em; }
   .role { font-weight: 600; color: var(--muted); margin: 0 0 18px; }
   .lead { font-size: 1.15rem; margin: 0 0 12px; }
-  .meta { color: var(--muted); font-size: .92rem; margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .meta { color: var(--muted); font-size: .9rem; margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .meta .loc { display: flex; align-items: center; gap: 6px; flex-basis: 100%; margin-bottom: 2px; }
+  .meta a { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px; border: 1px solid var(--line);
+            border-radius: 999px; text-decoration: none; color: var(--accent); font-weight: 500; background: var(--bg); }
+  .meta a:hover { background: var(--card); border-color: var(--underline); }
+  .meta svg { width: 16px; height: 16px; flex: none; }
+  .badge { font-size: .66rem; font-weight: 700; letter-spacing: .04em; padding: 1px 5px; border-radius: 4px;
+           background: var(--accent); color: var(--bg); }
   a { color: var(--accent); text-decoration: underline; text-decoration-color: var(--underline); text-underline-offset: 3px; }
   a:hover { text-decoration-color: currentColor; }
   h2 { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--heading); font-weight: 600;
@@ -79,11 +86,11 @@
   <p class="lead">I make software people depend on work reliably.</p>
   <p>Payment systems where money cannot be lost to rounding, ERP data that stays consistent across six business areas, and AI features that run 24/7 without an operator. I built these as a contractor, then took my own security and compliance products from an empty repository to seven marketplaces, and I run them in production alone. Today I also fix bugs in code I did not write, and those fixes have been merged into WooCommerce, React Router, Orca, PostHog and Zed.</p>
   <div class="meta">
-    <span>Japan (JST) · remote, async, in English</span>
-    <a href="mailto:founder@sphior.com">founder@sphior.com</a>
-    <a href="https://github.com/Toraastrta">GitHub</a>
-    <a href="https://www.linkedin.com/in/toraastrta">LinkedIn</a>
-    <a href="resume.pdf">Resume (PDF)</a>
+    <span class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Japan (JST) · remote, async, in English</span>
+    <a href="mailto:founder@sphior.com" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>founder@sphior.com</a>
+    <a href="https://github.com/Toraastrta" title="GitHub"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+    <a href="https://www.linkedin.com/in/toraastrta" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+    <a href="resume.pdf" title="Resume (PDF)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>Resume <span class="badge">PDF</span></a>
   </div>
 </header>
 
@@ -190,7 +197,7 @@
 <section>
   <h2>Work with me</h2>
   <p>I'm open to remote roles and to contract work: bug fixing, maintenance and compatibility work for WordPress and WooCommerce sites and plugins, and backend work in Python or TypeScript. From Japan I can keep work moving while teams in the Americas and Europe are offline, and hand over a fix with notes by their morning.</p>
-  <p>Email <a href="mailto:founder@sphior.com">founder@sphior.com</a> or see my <a href="resume.pdf">resume</a>.</p>
+  <p>Email <a href="mailto:founder@sphior.com">founder@sphior.com</a> or see my <a href="resume.pdf">resume (PDF)</a>.</p>
 </section>
 
 <footer>
