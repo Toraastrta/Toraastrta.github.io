@@ -3,29 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tora Tanigaki — bug fixing and maintenance</title>
-<meta name="description" content="I find and fix bugs in production software: reproduce, find the root cause, fix it with a test. Merged fixes in WooCommerce, PostHog, Zed and more.">
+<title>Toranosuke Tanigaki — Software Engineer</title>
+<meta name="description" content="Backend engineer (Python, TypeScript) who makes software people depend on work reliably. Fixes merged into WooCommerce, React Router, Orca, PostHog and Zed; builder of SPHIOR CODE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #ffffff;
-    --text: #1d1d1f;
-    --muted: #5f6368;
-    --line: #e3e3e6;
-    --card: #f7f7f8;
-    --accent: #2457d6;
+    --text: #1a1f2b;
+    --muted: #5b6475;
+    --line: #e3e6ec;
+    --card: #f7f8fa;
+    --accent: #2c5aa0;
     --ok: #1a7f37;
-    --wait: #9a6700;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #111214;
-      --text: #ececee;
-      --muted: #a0a3a8;
-      --line: #2a2c30;
-      --card: #191b1e;
-      --accent: #7ea2ff;
+      --bg: #111316;
+      --text: #eceef2;
+      --muted: #a2a9b6;
+      --line: #2a2e35;
+      --card: #191c20;
+      --accent: #86a8ff;
       --ok: #4ac26b;
-      --wait: #d4a72c;
     }
   }
   * { box-sizing: border-box; }
@@ -33,132 +34,162 @@
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font: 16px/1.6 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
-  main { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
-  h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 12px; }
-  h2 { font-size: 1.15rem; margin: 48px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
-  p { margin: 0 0 12px; }
+  main { max-width: 780px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: 2.1rem; line-height: 1.2; margin: 0 0 6px; letter-spacing: -.01em; }
+  .role { font-weight: 600; color: var(--muted); margin: 0 0 18px; }
+  .lead { font-size: 1.15rem; margin: 0 0 12px; }
+  .meta { color: var(--muted); font-size: .92rem; margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 14px; }
   a { color: var(--accent); }
-  .lead { color: var(--muted); font-size: 1.05rem; }
-  .meta { color: var(--muted); font-size: 0.9rem; margin-top: 16px; }
-  ul.items { list-style: none; padding: 0; margin: 0; }
-  ul.items li { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
-  .head { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; margin-bottom: 4px; }
-  .proj { font-weight: 600; }
-  .tag { font-size: 0.78rem; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; }
-  .tag.ok { color: var(--ok); }
-  .tag.wait { color: var(--wait); }
-  .small { color: var(--muted); font-size: 0.92rem; margin: 0; }
+  h2 { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+       margin: 52px 0 14px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  p { margin: 0 0 12px; }
+  .cards { display: grid; gap: 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .card h3 { font-size: 1.02rem; margin: 0 0 8px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+  .card h3 .links { font-weight: 500; font-size: .85rem; }
+  .tag { font-size: .72rem; font-weight: 600; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; color: var(--ok); }
+  .card ul { margin: 0; padding-left: 1.1em; }
+  .card li { margin-bottom: 6px; }
+  .label { font-weight: 600; }
+  .small { color: var(--muted); font-size: .92rem; }
+  .job { margin-bottom: 18px; }
+  .job-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; }
+  .job-head b { font-size: 1rem; }
+  .date { color: var(--muted); font-size: .88rem; }
+  .org { color: var(--muted); font-size: .92rem; margin-bottom: 4px; }
   ol.steps { padding-left: 1.2em; margin: 0; }
   ol.steps li { margin-bottom: 6px; }
-  footer { margin-top: 48px; color: var(--muted); font-size: 0.9rem; }
+  code { font-size: .9em; }
+  footer { margin-top: 48px; color: var(--muted); font-size: .9rem; }
 </style>
 </head>
 <body>
 <main>
 
 <header>
-  <h1>I find and fix bugs in production software.</h1>
-  <p class="lead">I reproduce the problem, find the root cause, fix it with a test that fails before the change, and verify the result in a running app. Mostly PHP (WordPress and WooCommerce), TypeScript and Python.</p>
-  <p class="meta">Toranosuke (Tora) Tanigaki · Remote, async, in English · <a href="mailto:founder@sphior.com">founder@sphior.com</a> · <a href="https://github.com/Toraastrta">GitHub</a></p>
+  <h1>Toranosuke Tanigaki</h1>
+  <p class="role">Software Engineer · Backend (Python / TypeScript) · WordPress &amp; WooCommerce bug fixing and maintenance</p>
+  <p class="lead">I make software people depend on work reliably.</p>
+  <p>Payment systems where money cannot be lost to rounding, ERP data that stays consistent across six business areas, and AI features that run 24/7 without an operator. I built these as a contractor, then took my own security and compliance products from an empty repository to seven marketplaces, and I run them in production alone. Today I also fix bugs in code I did not write, and those fixes have been merged into WooCommerce, React Router, Orca, PostHog and Zed.</p>
+  <div class="meta">
+    <span>Japan (JST) · remote, async, in English</span>
+    <a href="mailto:founder@sphior.com">founder@sphior.com</a>
+    <a href="https://github.com/Toraastrta">GitHub</a>
+    <a href="https://www.linkedin.com/in/toraastrta">LinkedIn</a>
+    <a href="resume.pdf">Resume (PDF)</a>
+  </div>
 </header>
 
 <section>
-  <h2>Merged fixes</h2>
-  <ul class="items">
-    <li>
-      <div class="head"><span class="proj">WooCommerce</span><span class="tag ok">merged</span><a href="https://github.com/woocommerce/woocommerce/pull/70900">#70900</a></div>
-      <p>The Mini-Cart footer computed the cart subtotal on every render and wrote it to an Interactivity API store that nothing read. I removed the dead state and kept the now-unused protected method as deprecated, so extensions that subclass the block keep working.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">Orca</span><span class="tag ok">merged</span><a href="https://github.com/stablyai/orca/pull/44941">#44941</a></div>
-      <p>On iOS 16.0 to 16.3, a single regex lookbehind anywhere in the bundle stops the mobile web app from loading. A recent change had added one back to the browser URL helper two days after the last ones were removed. I rewrote it as an equivalent pattern without lookbehind, so the next release loads on those iPhones again. Merged the same day.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">React Router</span><span class="tag ok">merged</span><a href="https://github.com/remix-run/react-router/pull/15776">#15776</a> · <a href="https://github.com/remix-run/react-router/pull/15779">#15779</a></div>
-      <p>Two fixes in one of the most used React libraries. Form <code>encType</code> and <code>formEncType</code> were compared case-sensitively, so <code>encType="Multipart/Form-Data"</code> fell back to URL encoding and file inputs were sent as just their file names. Memory history <code>go()</code> reported the requested delta even after clamping it at the start or end of the stack, so undoing a blocked navigation left the history on a different entry from the UI. Both were approved and merged by a maintainer.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">PostHog (posthog-python)</span><span class="tag ok">merged</span><a href="https://github.com/PostHog/posthog-python/pull/1265">#1265</a></div>
-      <p>Exception autocapture sent <code>null</code> instead of the truncated source line for any line longer than 1024 bytes. I traced it to a wrapper object that was never unwrapped, fixed it, and added a test that fails on the old code.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">e2e</span><span class="tag ok">merged</span><a href="https://github.com/e2e-inc/e2e/pull/1837">#1837</a> · <a href="https://github.com/e2e-inc/e2e/pull/1917">#1917</a></div>
-      <p>The replay cache treated growing Japanese, Chinese and Korean tallies (<code>42件</code>, <code>42건이 검색되었습니다</code>) as fixed page anchors, so recorded replays went stale. I extended the count pattern and checked the tests by deleting each part of the regex to confirm a test fails.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">Zed</span><span class="tag ok">merged</span><a href="https://github.com/zed-industries/zed/pull/66974">#66974</a></div>
-      <p>Eleven settings documented a different default value from the one Zed actually uses. I corrected them against the real defaults. Approved and merged within about an hour.</p>
-    </li>
-  </ul>
+  <h2>Selected fixes in other people's code</h2>
+  <p class="small">All merged by the projects' maintainers. Each one started from a reproduction, not a guess.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>React Router <span class="tag">merged</span> <span class="links"><a href="https://github.com/remix-run/react-router/pull/15776">#15776</a> · <a href="https://github.com/remix-run/react-router/pull/15779">#15779</a></span></h3>
+      <ul>
+        <li><span class="label">Problem:</span> <code>&lt;Form encType="Multipart/Form-Data"&gt;</code> was submitted URL-encoded, so file inputs arrived as just their names, while the same form without JavaScript worked.</li>
+        <li><span class="label">Reasoning:</span> <code>enctype</code> is an enumerated HTML attribute whose keywords are case-insensitive. I confirmed what Chromium does on a plain HTML page, then fixed it in the one helper both the form and the submit button go through, leaving the typed <code>useSubmit</code> API alone.</li>
+        <li><span class="label">Second fix:</span> memory history <code>go()</code> clamped the index but reported the requested delta, and the router undoes a blocked navigation with that delta, so it overshot. I reported the distance actually moved and added regression tests for both ends of the stack.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Orca <span class="tag">merged</span> <span class="links"><a href="https://github.com/stablyai/orca/pull/44941">#44941</a></span></h3>
+      <ul>
+        <li><span class="label">Problem:</span> iOS 16.0–16.3 cannot parse regex lookbehind, and one literal anywhere in a loaded chunk stops the whole mobile web app. A recent change had added one back two days after the last ones were removed.</li>
+        <li><span class="label">Reasoning:</span> I rewrote it as an alternation that matches valid surrogate pairs first and lone halves second, which selects exactly the same text, and kept the replace-based approach instead of <code>toWellFormed()</code> because Android WebViews before Chromium 111 lack it. Merged the same day.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>WooCommerce <span class="tag">merged</span> <span class="links"><a href="https://github.com/woocommerce/woocommerce/pull/70900">#70900</a></span></h3>
+      <ul>
+        <li><span class="label">Problem:</span> the Mini-Cart footer computed the cart subtotal on every render and wrote it to an Interactivity API store that nothing read.</li>
+        <li><span class="label">Reasoning:</span> I removed the dead state but kept the now-unused protected method as deprecated rather than deleting it, because extensions can subclass the block and call it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>PostHog, Zed, e2e <span class="tag">merged</span> <span class="links"><a href="https://github.com/PostHog/posthog-python/pull/1265">#1265</a> · <a href="https://github.com/zed-industries/zed/pull/66974">#66974</a> · <a href="https://github.com/e2e-inc/e2e/pull/1837">#1837</a> · <a href="https://github.com/e2e-inc/e2e/pull/1917">#1917</a></span></h3>
+      <ul>
+        <li><span class="label">PostHog:</span> exception autocapture sent <code>null</code> for source lines over 1024 bytes because a truncation wrapper object was never unwrapped. Added a test that fails on the old code.</li>
+        <li><span class="label">Zed:</span> eleven settings documented a different default from the real one; where sources disagreed, I settled it from the merged value and the release note. Merged within about an hour.</li>
+        <li><span class="label">e2e:</span> the replay cache treated growing Japanese, Chinese and Korean counts as fixed anchors. I checked the tests by deleting each part of the pattern and confirming one fails.</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <section>
-  <h2>In review</h2>
-  <ul class="items">
-    <li>
-      <div class="head"><span class="proj">Supabase Storage</span><span class="tag wait">in review</span><a href="https://github.com/supabase/storage/pull/1722">#1722</a></div>
-      <p>S3 requests for operations Storage does not implement, such as PutObjectTagging and DeleteObjectTagging, were routed to upload and delete. They overwrote or deleted objects and buckets while returning success. Reproduced with the AWS SDK against a real database; they now get 501.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">WooCommerce</span><span class="tag wait">in review</span><a href="https://github.com/woocommerce/woocommerce/pull/71118">#71118</a></div>
-      <p>The Variation Selector rendered a list with no list items, so screen readers announced an empty list (a critical axe-core error). I traced it to the change that introduced it and restored the missing role, with a unit test.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">Code Snippets</span><span class="tag wait">in review</span><a href="https://github.com/codesnippetspro/code-snippets/pull/633">#633</a></div>
-      <p>In Safari, Save and Activate saved a snippet without activating it, because the editor read the pressed button from keyboard focus. I switched it to the submit event's button and kept Enter in the title field as a plain save, so it cannot deactivate a snippet by accident. Covered by end-to-end tests that fail before the fix.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">Otter Blocks (Themeisle)</span><span class="tag wait">in review</span><a href="https://github.com/Codeinwp/otter-blocks/pull/3187">#3187</a></div>
-      <p>Centered text with the typing animation jumped sideways when the animation ended. I measured the text position in a running site, found two causes (the caret took up width, and a hidden copy of the last character was never cleared), and fixed both with unit tests that fail before the change.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">LifterLMS</span><span class="tag wait">in review</span><a href="https://github.com/gocodebox/lifterlms/pull/3510">#3510</a></div>
-      <p>Post search results, such as the certificate template search, showed titles with raw HTML entities (<code>&amp;#8211;</code> instead of a dash). An open bug since 2022. I decoded the titles the same way the rest of the package does and added a unit test that fails before the change.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">Weblate</span><span class="tag wait">in review</span><a href="https://github.com/WeblateOrg/weblate/pull/22974">#22974</a></div>
-      <p>Project statistics counted strings from components shared into the project, but the search behind those counts left them out, so a link such as "Read-only strings: 75" opened "No strings found!". I made the project and project language searches cover the same components as the statistics, with a test that fails before the change.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">Ultimate Member</span><span class="tag wait">in review</span><a href="https://github.com/ultimatemember/ultimatemember/pull/1945">#1945</a></div>
-      <p>When an SEO plugin built its <code>/llms.txt</code> by rendering page content, the profile shortcode redirected logged-out visitors to the home page and replaced the whole response. I reproduced the redirect and limited it to requests that are actually viewing a page, so the profile page still redirects as before.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">Meta Box</span><span class="tag wait">in review</span><a href="https://github.com/wpmetabox/meta-box/pull/1746">#1746</a></div>
-      <p>A user reported on the WordPress.org forum that a select field showed <code>[object Object]</code> instead of the chosen item. I reproduced it on WooCommerce screens, where selectWoo replaces select2, traced it to the icon field missing a check that other fields already had, and fixed it.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">Ghost</span><span class="tag wait">in review</span><a href="https://github.com/TryGhost/Ghost/pull/32937">#32937</a></div>
-      <p>Comment counts did not render when the class option contained spaces.</p>
-    </li>
-    <li>
-      <div class="head"><span class="proj">flyctl</span><span class="tag wait">in review</span><a href="https://github.com/superfly/flyctl/pull/5479">#5479</a></div>
-      <p><code>fly secrets import</code> cut quoted values at a <code>#</code> character.</p>
-    </li>
-  </ul>
+  <h2>Products I build and run</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>SPHIOR CODE <span class="links"><a href="https://github.com/Toraastrta/sphior-code">GitHub</a> · <a href="https://marketplace.visualstudio.com/items?itemName=sphior.sphior-code">VS Code</a> · <a href="https://plugins.jetbrains.com/plugin/33696-sphior-code">JetBrains</a></span></h3>
+      <p>Gives developers the same security findings in every tool they use, without their code leaving the machine. Open source (MIT).</p>
+      <ul>
+        <li>No AI in detection, so results are reproducible and defensible in an audit.</li>
+        <li>36 secret rules, 85 pattern rules mapped to CWE and OWASP, and 69 taint rules across 13 languages parsed with real grammars (tree-sitter, Babel).</li>
+        <li>One engine powers the CLI (npm, Homebrew, SARIF), a GitHub Action, VS Code, Open VSX, JetBrains, and an MCP server that lets AI coding agents fix what it finds.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>SPHIOR Security Diagnosis <span class="links"><a href="https://sphior.com/">sphior.com</a></span></h3>
+      <p>Automated external testing of web applications, including pages behind the login, safe to run against live production sites.</p>
+      <ul>
+        <li>Never asks for a password: a Chrome extension hands over the login session, encrypted in the browser (AES-GCM with key wrapping) and valid for one scan.</li>
+        <li>Excluded 280 of 7,509 test templates that could change the target and rate-limited every scan; new templates are proven against a local decoy site before they run (1,240 of 1,245 passed, zero false positives).</li>
+        <li>Lets customers prove to an auditor that their evidence was never altered: records are sealed with SHA-256 hash chains and Merkle roots, anchored with OpenTimestamps, and checkable with an open-source verifier.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Sphior Ledger for Jira <span class="links"><a href="https://marketplace.atlassian.com/apps/4197217154/sphior-ledger-for-jira">Atlassian Marketplace</a></span></h3>
+      <p>Gives Jira admins the change history and audit evidence Jira does not keep for its own configuration. Passed Atlassian's Marketplace security review; 800+ tests.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Experience</h2>
+  <div class="job">
+    <div class="job-head"><b>Founder / Engineer — SPHIOR</b><span class="date">Jul 2025 – Present</span></div>
+    <div class="org">B2B security &amp; compliance SaaS · solo</div>
+    <p>Took the products above from an empty repository to live listings on seven marketplaces on my own, and run them in production: architecture, API, infrastructure and billing.</p>
+  </div>
+  <div class="job">
+    <div class="job-head"><b>Backend Engineer — booking &amp; customer-service SaaS</b><span class="date">Jan 2025 – Jun 2025</span></div>
+    <div class="org">Contract · Python, Django, PostgreSQL, AWS</div>
+    <p>Let a booking platform answer customer messages around the clock without an operator, while keeping bookings correct by never letting the LLM decide stock or scheduling, and lowered LLM cost without hurting reply quality.</p>
+  </div>
+  <div class="job">
+    <div class="job-head"><b>Backend Engineer — internal OS + ERP</b><span class="date">Feb 2024 – Dec 2024</span></div>
+    <div class="org">Contract · Python, FastAPI, PostgreSQL, TypeScript, React</div>
+    <p>Brought accounting, inventory, HR, attendance, CRM and supply chain onto one shared data model without migrating the existing database, so stock and books cannot drift apart after a failure.</p>
+  </div>
+  <div class="job">
+    <div class="job-head"><b>Backend Engineer — crypto payments fintech</b><span class="date">Jan 2023 – Jan 2024</span></div>
+    <div class="org">Contract · Python, FastAPI, PostgreSQL, TypeScript, Google Cloud</div>
+    <p>Let users hold crypto and fiat in one balance with no rounding errors, and made conversions resume where they stopped after a failure instead of starting over.</p>
+  </div>
 </section>
 
 <section>
   <h2>How I work</h2>
   <ol class="steps">
-    <li>Reproduce the bug locally, in a test or a running app, before touching the code.</li>
+    <li>Reproduce the problem first, in a test or a running app, before touching the code.</li>
     <li>Find the root cause, including the change that introduced it when there is one.</li>
     <li>Fix it in the smallest change that solves it, without breaking code that depends on the old behavior.</li>
     <li>Prove it: a test that fails before the fix and passes after, and a check in the running app.</li>
   </ol>
-  <p class="small" style="margin-top:12px">I use AI tools (Claude Code) to move faster and say so in every pull request. I review every change and run the tests and checks myself.</p>
+  <p class="small" style="margin-top:12px">I use AI coding tools (Claude Code) every day to move faster, and I say so in my pull requests. I review every change and run the checks myself.</p>
 </section>
 
 <section>
-  <h2>What I can do for your team</h2>
-  <p>Bug fixing and ongoing maintenance as a contractor, hourly or monthly: working through an issue backlog, fixing regressions after a release, keeping a WordPress or WooCommerce plugin compatible with new WordPress, WooCommerce and PHP versions, or the same for a TypeScript or Python codebase.</p>
-  <p>To get in touch, email me at <a href="mailto:founder@sphior.com">founder@sphior.com</a>.</p>
+  <h2>Work with me</h2>
+  <p>I'm open to remote roles and to contract work: bug fixing, maintenance and compatibility work for WordPress and WooCommerce sites and plugins, and backend work in Python or TypeScript. From Japan I can keep work moving while teams in the Americas and Europe are offline, and hand over a fix with notes by their morning.</p>
+  <p>Email <a href="mailto:founder@sphior.com">founder@sphior.com</a> or see my <a href="resume.pdf">resume</a>.</p>
 </section>
 
 <footer>
-  <p>I also build and ship my own developer tools. See <a href="https://github.com/Toraastrta">my GitHub profile</a>.</p>
+  <p>© 2026 Toranosuke Tanigaki</p>
 </footer>
 
 </main>
