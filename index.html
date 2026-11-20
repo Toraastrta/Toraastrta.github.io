@@ -15,9 +15,9 @@
     --muted: #5b6475;
     --line: #e3e6ec;
     --card: #f7f8fa;
-    --accent: #db2777;
+    --accent: #15803d;
     --heading: #8a909c;
-    --underline: #f4a8c9;
+    --underline: #9fd8b1;
     --ok: #2f7a45;
     --merged: #8250df;
     --pr: #2563eb;
@@ -29,9 +29,9 @@
       --muted: #a2a9b6;
       --line: #2a2e35;
       --card: #191c20;
-      --accent: #f472b6;
+      --accent: #4ade80;
       --heading: #7d8491;
-      --underline: #8a2f5a;
+      --underline: #23683a;
       --ok: #6fbf86;
       --merged: #a371f7;
       --pr: #60a5fa;
@@ -71,6 +71,12 @@
   .card h3 { font-size: 1.02rem; margin: 0 0 8px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
   .card h3 .links { font-weight: 500; font-size: .85rem; }
   .tag { font-size: .7rem; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--merged); color: #fff; }
+  a[href^="mailto:"]:not(.email) { color: #ea580c; text-decoration-color: #f6b48d; }
+  a[href$=".pdf"]:not(.resume) { color: #dc2626; text-decoration-color: #f2a4a4; }
+  @media (prefers-color-scheme: dark) {
+    a[href^="mailto:"]:not(.email) { color: #fb923c; text-decoration-color: #8a4b22; }
+    a[href$=".pdf"]:not(.resume) { color: #f87171; text-decoration-color: #8a3030; }
+  }
   a[href*="/pull/"] { color: var(--pr); text-decoration-color: currentColor; text-decoration-thickness: 1px; font-weight: 600; }
   .card ul { margin: 0; padding-left: 1.1em; }
   .card li { margin-bottom: 6px; }
