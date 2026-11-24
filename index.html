@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Toranosuke Tanigaki — Software Engineer</title>
-<meta name="description" content="Backend engineer (Python, TypeScript) who makes software people depend on work reliably. Fixes merged into WooCommerce, React Router, Orca, PostHog and Zed; builder of SPHIOR CODE.">
+<meta name="description" content="Backend engineer (Python, TypeScript) who builds software people depend on and makes it work reliably. Fixes merged into WooCommerce, Supabase, React Router, Orca, PostHog and Zed; builder of SPHIOR CODE.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -110,8 +110,8 @@
 <header>
   <h1>Toranosuke Tanigaki</h1>
   <p class="role">Software Engineer · Backend (Python / TypeScript) · Open-source contributor</p>
-  <p class="lead">I make software people depend on work reliably.</p>
-  <p>Payment systems where money cannot be lost to rounding, ERP data that stays consistent across six business areas, and AI features that run 24/7 without an operator. I built these as a contractor, then took my own security and compliance products from an empty repository to seven marketplaces, and I run them in production alone. Today I also fix bugs in code I did not write, and those fixes have been merged into WooCommerce, React Router, Orca, PostHog and Zed.</p>
+  <p class="lead">I build software that people depend on and make it work reliably.</p>
+  <p>Payment systems where money cannot be lost to rounding, ERP data that stays consistent across six business areas, and AI features that run 24/7 without an operator. I built these as a contractor, then took my own security and compliance products from an empty repository to seven marketplaces, and I run them in production alone. Today I also fix bugs in code I did not write, and those fixes have been merged into WooCommerce, Supabase, React Router, Orca, PostHog and Zed.</p>
   <div class="meta">
     <span class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Japan (JST) · remote, async, in English</span>
     <a class="email" href="mailto:founder@sphior.com" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>founder@sphior.com</a>
@@ -126,6 +126,13 @@
   <p class="small">All merged by the projects' maintainers. Each one started from a reproduction, not a guess.</p>
   <div class="cards">
     <div class="card">
+      <h3>Supabase Storage <span class="tag">merged</span> <span class="links"><a href="https://github.com/supabase/storage/pull/1722">#1722</a></span></h3>
+      <ul>
+        <li><span class="label">Problem:</span> S3 write requests for operations Storage does not implement fell through to catch-all routes. <code>PUT ?tagging</code> replaced the object's contents with the tagging XML, <code>DELETE ?tagging</code> deleted the object, and <code>DELETE ?cors</code> deleted an empty bucket, all returning success.</li>
+        <li><span class="label">Fix:</span> requests that carry an unsupported S3 subresource are now rejected as unsupported before they reach the upload and delete handlers, so a client calling an unimplemented API gets an error instead of losing data.</li>
+      </ul>
+    </div>
+    <div class="card">
       <h3>React Router <span class="tag">merged</span> <span class="links"><a href="https://github.com/remix-run/react-router/pull/15776">#15776</a> · <a href="https://github.com/remix-run/react-router/pull/15779">#15779</a></span></h3>
       <ul>
         <li><span class="label">Problem:</span> <code>&lt;Form encType="Multipart/Form-Data"&gt;</code> was submitted URL-encoded, so file inputs arrived as just their names, while the same form without JavaScript worked.</li>
@@ -134,25 +141,29 @@
       </ul>
     </div>
     <div class="card">
-      <h3>Orca <span class="tag">merged</span> <span class="links"><a href="https://github.com/stablyai/orca/pull/44941">#44941</a></span></h3>
+      <h3>Orca <span class="tag">merged</span> <span class="links"><a href="https://github.com/stablyai/orca/pull/44941">#44941</a> · <a href="https://github.com/stablyai/orca/pull/45192">#45192</a></span></h3>
       <ul>
         <li><span class="label">Problem:</span> iOS 16.0–16.3 cannot parse regex lookbehind, and one literal anywhere in a loaded chunk stops the whole mobile web app. A recent change had added one back two days after the last ones were removed.</li>
-        <li><span class="label">Reasoning:</span> I rewrote it as an alternation that matches valid surrogate pairs first and lone halves second, which selects exactly the same text, and kept the replace-based approach instead of <code>toWellFormed()</code> because Android WebViews before Chromium 111 lack it. Merged the same day.</li>
+        <li><span class="label">Reasoning:</span> I replaced it with a plain character class under the <code>u</code> flag, which reads a valid surrogate pair as one code point and so only matches lone halves, and checked it gives the same output as the old pattern on 111,111 edge-case strings. I kept the replace-based approach instead of <code>toWellFormed()</code> because Android WebViews before Chromium 111 lack it. Merged the same day.</li>
+        <li><span class="label">Second fix:</span> on iOS before 17.4, picking a model or effort level in mobile chat threw because <code>Promise.withResolvers</code> does not exist there, so the pick never applied. I replaced it with a plain <code>new Promise</code> that keeps its <code>resolve</code>, which was all it was used for.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>WooCommerce <span class="tag">merged</span> <span class="links"><a href="https://github.com/woocommerce/woocommerce/pull/70900">#70900</a></span></h3>
+      <h3>WooCommerce <span class="tag">merged</span> <span class="links"><a href="https://github.com/woocommerce/woocommerce/pull/70900">#70900</a> · <a href="https://github.com/woocommerce/woocommerce/pull/71118">#71118</a></span></h3>
       <ul>
         <li><span class="label">Problem:</span> the Mini-Cart footer computed the cart subtotal on every render and wrote it to an Interactivity API store that nothing read.</li>
         <li><span class="label">Reasoning:</span> I removed the dead state but kept the now-unused protected method as deprecated rather than deleting it, because extensions can subclass the block and call it.</li>
+        <li><span class="label">Second fix:</span> the Variation Selector printed <code>role="list"</code> but its server-rendered rows had lost <code>role="listitem"</code>, so screen readers announced an empty list and axe flagged it as critical. I restored the role where the row wrapper is now built.</li>
       </ul>
     </div>
     <div class="card">
-      <h3>PostHog, Zed, e2e <span class="tag">merged</span> <span class="links"><a href="https://github.com/PostHog/posthog-python/pull/1265">#1265</a> · <a href="https://github.com/zed-industries/zed/pull/66974">#66974</a> · <a href="https://github.com/e2e-inc/e2e/pull/1837">#1837</a> · <a href="https://github.com/e2e-inc/e2e/pull/1917">#1917</a></span></h3>
+      <h3>PostHog, Zed, e2e, Meta Box, Hugging Face <span class="tag">merged</span> <span class="links"><a href="https://github.com/PostHog/posthog-python/pull/1265">#1265</a> · <a href="https://github.com/zed-industries/zed/pull/66974">#66974</a> · <a href="https://github.com/e2e-inc/e2e/pull/1837">#1837</a> · <a href="https://github.com/e2e-inc/e2e/pull/1917">#1917</a> · <a href="https://github.com/wpmetabox/meta-box/pull/1746">#1746</a> · <a href="https://github.com/huggingface/huggingface_hub/pull/5400">#5400</a></span></h3>
       <ul>
         <li><span class="label">PostHog:</span> exception autocapture sent <code>null</code> for source lines over 1024 bytes because a truncation wrapper object was never unwrapped. Added a test that fails on the old code.</li>
         <li><span class="label">Zed:</span> eleven settings documented a different default from the real one; where sources disagreed, I settled it from the merged value and the release note. Merged within about an hour.</li>
         <li><span class="label">e2e:</span> the replay cache treated growing Japanese, Chinese and Korean counts as fixed anchors. I checked the tests by deleting each part of the pattern and confirming one fails.</li>
+        <li><span class="label">Meta Box:</span> the icon field showed <code>[object Object]</code> on WooCommerce screens, because selectWoo renders a jQuery object as text. I applied the same check the plugin already used for its other select fields.</li>
+        <li><span class="label">Hugging Face:</span> a documented <code>hf jobs uv run --repo</code> example did not error but started a Job that failed, because the option no longer exists and the arguments passed through to the script. I compared the documented flags with the real CLI options and fixed each mismatch.</li>
       </ul>
     </div>
   </div>
